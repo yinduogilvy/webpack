@@ -1,1 +1,1 @@
-# webpack
+# yindu-cli-template

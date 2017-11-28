@@ -1,0 +1,47 @@
+@charset 'utf-8';
+* {
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+.loading {
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  .loaded {
+    & {
+      transition: all .5s linear;
+      transform: translate3d(0,-100%,0);
+    }
+  }
+}
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+.page {
+  width: 100%;
+  height: 100%;
+}
+
+/*处理 在 640 页面下 弹窗 放大*/
+.weui-dialog {
+	-webkit-transform:translate3d(-50%,-50%,0) scale(1.5)!important;
+}
+.weui-toast {
+	top: 50%!important;
+	left: 50%!important;
+	margin-left: auto!important;
+	-webkit-transform: translate3d(-50%,-50%,0) scale(1.5)!important;
+}
