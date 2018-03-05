@@ -1,6 +1,8 @@
 const  UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
 merge = require('webpack-merge'),
 path = require('path'),
+dist = path.resolve(__dirname,"..",'dist'),
+src = path.resolve(__dirname,"..",'src'),
 CopyWebpackPlugin = require('copy-webpack-plugin'),
 common = require('./webpack.base.js');
 module.exports = merge(common, {
