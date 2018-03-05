@@ -3,39 +3,53 @@
   margin:0;
   padding:0;
   box-sizing: border-box;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -khtml-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  font-size:0;
 }
 html,
 body {
   width:100%;
   height:100%;
   overflow:hidden;
-  /*test code*/
-  //background: url("../img/common-bg.jpg");
 }
 
 .loading {
-  /*test code*/
-  //background: url("../img/page3rightcontent.png");
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  .loaded {
-    & {
-      transition: all .5s linear;
-      transform: translate3d(0,-100%,0);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top:0;
+    left: 0;
+    background:#fff;
+    .loaded &{
+      display: none;
     }
-  }
+}
+.loading img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%,-50%,0);
+    transform: translate3d(-50%,-50%,0);
 }
 .wrapper {
   width: 100%;
   height: 100%;
 }
 .page {
+  position:relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 /*处理 在 640 页面下 弹窗 放大*/
