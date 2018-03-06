@@ -56,7 +56,7 @@ module.exports = {
             ]
           },
           {
-            test:/\.scss$/,
+            test:/\.s?css$/,
             exclude: /(node_modules|bower_components)/,
             use:ExtractTextWebpackPlugin.extract({
               fallback:'style-loader',

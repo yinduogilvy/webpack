@@ -3,7 +3,6 @@ const noop = function(){},
 eventDomain = document.location.href.substr(0,document.location.href.lastIndexOf("/")+1);
 import assign from "babel-runtime/core-js/object/assign";
 import css from "../css/mode.scss";
-
 /*
 ** @Class:页面布局
 ** @params:config:Object 页面配置
