@@ -2,14 +2,14 @@ const path = require('path'),
 dist = path.resolve(__dirname,"..",'dist'),
 src = path.resolve(__dirname,"..",'src'),
 webpack = require("webpack"),
-Dashboard = require('webpack-dashboard'),
-DashboardPlugin = require('webpack-dashboard/plugin'),
+//Dashboard = require('webpack-dashboard'),
+//DashboardPlugin = require('webpack-dashboard/plugin'),
 WriteFileWebpackPlugin = require('write-file-webpack-plugin'),
 CopyWebpackPlugin = require('copy-webpack-plugin'),
 ExtractTextWebpackPlugin = require("extract-text-webpack-plugin"),
 HtmlWebpackPlugin = require("html-webpack-plugin"),
-CleanWebpackPlugin = require('clean-webpack-plugin'),
-dashboard = new Dashboard();
+CleanWebpackPlugin = require('clean-webpack-plugin');
+//dashboard = new Dashboard();
 const statsArr = {
   'zh':'26984424300688c49d02f5eed4031a61',
   'migugame':'6cca1164ad57902944130e5193cec5cc',
