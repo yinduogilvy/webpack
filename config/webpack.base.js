@@ -2,12 +2,14 @@ const path = require('path'),
 dist = path.resolve(__dirname,"..",'dist'),
 src = path.resolve(__dirname,"..",'src'),
 webpack = require("webpack"),
+Dashboard = require('webpack-dashboard'),
+DashboardPlugin = require('webpack-dashboard/plugin'),
 WriteFileWebpackPlugin = require('write-file-webpack-plugin'),
 CopyWebpackPlugin = require('copy-webpack-plugin'),
 ExtractTextWebpackPlugin = require("extract-text-webpack-plugin"),
 HtmlWebpackPlugin = require("html-webpack-plugin"),
-CleanWebpackPlugin = require('clean-webpack-plugin');
-
+CleanWebpackPlugin = require('clean-webpack-plugin'),
+dashboard = new Dashboard();
 const statsArr = {
   'zh':'26984424300688c49d02f5eed4031a61',
   'migugame':'6cca1164ad57902944130e5193cec5cc',
@@ -15,7 +17,6 @@ const statsArr = {
   'zjyd':'d703449a63eadad220b77508bbd3b2f6',
   'shyd':'dddbc84f8b0595d74e1a148e6d189749'
 }
-
 
 module.exports = {
     entry: {
@@ -97,6 +98,7 @@ module.exports = {
       ]
     },
     plugins:[
+      //new DashboardPlugin(dashboard.setData),
       new ExtractTextWebpackPlugin("css/mode.css"),
       new CleanWebpackPlugin(['dist/js/*.*','dist/*.*']),
       new HtmlWebpackPlugin({

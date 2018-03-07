@@ -37,8 +37,8 @@ var Page = (function(){
           width:"100%",
           padding:"10px",
           lineHeight:1.5,
-          backgroundColor:"red",
-          color:"yellow",
+          backgroundColor:"rgba(0,0,0,0)",
+          color:"rgba(255,0,0,.5)",
           fontSize:24,
           zIndex:9999
         }).text("此页面仅提供测试，上线前请联系程序！");
@@ -101,7 +101,7 @@ var Page = (function(){
     ** @function:初始化页面
     */
     initPage:function(){
-      //$("body").addClass("loaded");
+      $("body").addClass("loaded");
       this.pageSlider = new WxMoment.PageSlider({
         pages:$(".page")
       });

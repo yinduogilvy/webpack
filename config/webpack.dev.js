@@ -9,7 +9,8 @@ module.exports = merge(common, {
   devServer:{
     contentBase:dist,
     open:true,
-    inline:true
+    inline:true,
+    quiet:true
   },
   plugins:[new webpack.DefinePlugin({
     'DEBUG':JSON.stringify(process.env.NODE_ENV=="dev")
