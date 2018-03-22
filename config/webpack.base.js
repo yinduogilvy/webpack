@@ -104,7 +104,7 @@ module.exports = {
       new CleanWebpackPlugin(['dist/js/*.*','dist/*.*']),
       new HtmlWebpackPlugin({
         filename:'index.html',
-        title:"测试使用",
+        title:"测试使用1111",
         template:path.resolve(src,"index.html"),
         inject:"body",
         chunks:['index'],
