@@ -27,7 +27,8 @@ module.exports = {
         path: dist
     },
     resolve:{
-
+      alias:{
+      }
     },
     module: {
         rules: [
