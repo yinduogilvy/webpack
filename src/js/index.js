@@ -1,10 +1,14 @@
-
 const noop = function(){},
-eventDomain = document.location.href.substr(0,document.location.href.lastIndexOf("/")+1);
+  eventDomain = document.location.href.substr(0,document.location.href.lastIndexOf("/")+1);
 import assign from "babel-runtime/core-js/object/assign";
 import css from "../css/mode.scss";
 
+if (process.env.NODE_ENV == 'prod'){
+    console.log = function() {};
+}
 
+//Config
+var Config = BASE_CONFIG || {};
 
 /*
 ** @Class:页面布局
@@ -24,12 +28,15 @@ var Page = (function(){
     ** @params: config:Object 配置文件
     */
     init:function(config){
+      //获取index.js的hash
+      let hash = this.getHash();
       assign(this,{
         cdn:$("base").attr("href") || "",
         cache:false,
         shareTitle:'',
         shareDesc:'',
-        debug:true
+        debug:true,
+        version:  hash || ''
       },config);
       if(this.debug){
         var otips = document.createElement("div");
@@ -46,13 +53,16 @@ var Page = (function(){
           zIndex:9999
         }).text("此页面仅提供测试，上线前请联系程序！");
         $("body").append(otips);
-
       }
       this.loadRes();
 
       this.initShareConfig();
     },
-
+    getHash: function(){
+        let $script = $('script[src*="index"]');
+        let hash = ($script.attr('src').split('?')).pop();
+        return hash;
+    },
     /*
     ** @function:加载资源
     */
@@ -64,7 +74,7 @@ var Page = (function(){
 
       var self = this;
       this.res.each(function(){
-        var url = self.cdn+$(this).data("src")+(self.cache?"?v="+(+new Date):"");
+        var url = self.cdn+$(this).data("src")+(self.cache?"?v="+(self.version):"");
         $(this).data("src",url);
         loader.addImage(url);
       })

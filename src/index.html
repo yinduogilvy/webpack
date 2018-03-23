@@ -4,39 +4,44 @@
     <meta charset="utf-8">
     <title><%=htmlWebpackPlugin.options.title %></title>
     <meta name="viewport" content="width=640,user-scalable=no"/>
-    <script src="//wximg.qq.com/wxp/libs/wxmoment/0.0.4/wxmoment.min.js"></script>
-    <script src="http://www.yindudigital.com/public/vconsole.min.js" charset="utf-8"></script>
+    <script src="//wximg.qq.com/wxp/libs/wxmoment/0.0.4/wxmoment.min.js"></script>    
     <link rel="stylesheet" href="http://cdn.yindudigital.cn/public/weui/weui.min.css">
     <script src="http://cdn.yindudigital.cn/public/weui/weui.min.js" charset="utf-8"></script>
+    <% if (htmlWebpackPlugin.options.vconsole) { %>
+    <script src="http://www.yindudigital.com/public/vconsole.min.js"></script>
+    <% } %>
+    <% if (htmlWebpackPlugin.options.cdnURL) { %>
+    <base href="<%= htmlWebpackPlugin.options.cdnURL %>">
+    <% } %>
   </head>
   <body>
     <div class="loading">
-        <img src="img/loading.gif"/>
+        <img src="img/loading.svg"/>
     </div>
     <div class="wrapper">
-      <div class="page page1"></div>
+      <div class="page page1">
+        
+      </div>
     </div>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-      //根据环境修改配置
-      var wxscript = document.createElement("script");
-      wxscript.charset="utf-8";
-      wxscript.src = "//"+document.domain+"/cache/wx_config.php";
-      document.body.appendChild(wxscript);
-    </script>
+    <% if (htmlWebpackPlugin.options.wxConfig) { %>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="<%= htmlWebpackPlugin.options.wxConfig %>"></script>
+    <% } %>
+    <% if (htmlWebpackPlugin.options.stats) { %>
     <!--统计代码-->
     <div style="display:none">
-      <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "//hm.baidu.com/hm.js?<%=htmlWebpackPlugin.options.stats %>";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-      </script>
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?<%=htmlWebpackPlugin.options.stats %>";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
     </div>
     <!--统计代码-->
+    <% } %>
   </body>
 
 </html>
