@@ -22,6 +22,7 @@ body {
     top:0;
     left: 0;
     background:#fff;
+    z-index: 10;
     .loaded &{
       display: none;
     }

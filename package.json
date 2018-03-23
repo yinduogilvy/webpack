@@ -8,7 +8,8 @@
     "watchFile": "node nodelib/fswatch.js ",
     "dev:watch": "concurrently \"npm run watchFile \" \"npm run watch \"",
     "dev": "npm run watch ",
-    "build": "set NODE_ENV=product&&webpack --config config/webpack.prod.js",
+    "testing": "set NODE_ENV=testing&&webpack --config config/webpack.prod.js",
+    "build": "set NODE_ENV=prod&&webpack --config config/webpack.prod.js",
     "watch": "set NODE_ENV=dev&&webpack-dev-server --config config/webpack.dev.js",
     "webpack": "webpack --config config/webpack.dev.js"
   },
