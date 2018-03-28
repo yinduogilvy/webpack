@@ -32,7 +32,7 @@ module.exports = merge(common, {
             [
                 { 
                     from: path.resolve(src, "img"),
-                    to: `${dist}/img/[name].[ext]` 
+                    to: `${dist}/img/` 
                 }
             ]
         )
