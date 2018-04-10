@@ -14,11 +14,11 @@
 * sass-loader
 * node-sass
 * autoprefixer
-* [cssnano]: http://cssnano.co/guides/optimisations/ "http://cssnano.co/guides/optimisations/"
+* cssnano
 * css-loader
 * style-loader
 * extract-text-webpack-plugin
-* [postcss-next]: https://cssnext.io/features/#automatic-vendor-prefixes "https://cssnext.io/features/#automatic-vendor-prefixes"
+* postcss-next]
 
 # assets
 * url-loader
@@ -26,3 +26,4 @@
 
 # html
 * html-webpack-plugin
+

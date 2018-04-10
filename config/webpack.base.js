@@ -2,14 +2,11 @@ const path = require('path'),
     dist = path.resolve(__dirname, "..", 'dist'),
     src = path.resolve(__dirname, "..", 'src'),
     webpack = require("webpack"),
-    //Dashboard = require('webpack-dashboard'),
-    //DashboardPlugin = require('webpack-dashboard/plugin'),
     WriteFileWebpackPlugin = require('write-file-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
     ExtractTextWebpackPlugin = require("extract-text-webpack-plugin"),
     HtmlWebpackPlugin = require("html-webpack-plugin"),
     CleanWebpackPlugin = require('clean-webpack-plugin');
-//dashboard = new Dashboard();
 
 module.exports = {
     entry: {

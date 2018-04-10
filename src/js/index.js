@@ -32,7 +32,7 @@ var Page = (function(){
       let hash = this.getHash();
       assign(this,{
         cdn:$("base").attr("href") || "",
-        cache:false,
+        cache:true,
         shareTitle:'',
         shareDesc:'',
         debug:true,
