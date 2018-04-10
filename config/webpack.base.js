@@ -87,9 +87,15 @@ module.exports = {
         ]
     },
     plugins: [
-        //new DashboardPlugin(dashboard.setData),
-        new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin([path.resolve(__dirname,"..",'dist')]),
         new ExtractTextWebpackPlugin("css/mode.css"),
-        new HtmlWebpackPlugin()
+        new CopyWebpackPlugin(
+            [
+                { 
+                    from: path.resolve(src, "img"),
+                    to: `${dist}/img/` 
+                }
+            ]
+        )
     ]
 }

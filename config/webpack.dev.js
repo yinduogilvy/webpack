@@ -9,14 +9,7 @@ const path = require('path'),
 //config
 const config = require('../config.js');
 const NODE_ENV = process.env.NODE_ENV || 'dev';
-let HtmlWebpackConfig = {
-    filename: 'index.html',
-    title: "开发环境",
-    template: path.resolve(src, "index.html"),
-    inject: "body",
-    chunks: ['index'],
-    hash: true
-};
+let HtmlWebpackConfig = config['devTemplate'];
 Object.assign(HtmlWebpackConfig, config[NODE_ENV]);
 module.exports = merge(common, {
     devtool: "inline-source-map",
@@ -31,13 +24,6 @@ module.exports = merge(common, {
             'BASE_CONFIG': JSON.stringify(config[NODE_ENV])
         }),
         new HtmlWebpackPlugin(HtmlWebpackConfig),
-        new CopyWebpackPlugin(
-            [
-                { 
-                    from: path.resolve(src, "img"),
-                    to: `${dist}/img/` 
-                }
-            ]
-        )
+        
     ]
 });

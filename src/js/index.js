@@ -9,7 +9,6 @@ if (process.env.NODE_ENV == 'prod'){
 
 //Config
 var Config = BASE_CONFIG || {};
-
 /*
 ** @Class:页面布局
 ** @params:config:Object 页面配置

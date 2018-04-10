@@ -1,4 +1,5 @@
-const path = require('path');
+const path = require('path'),
+src = path.resolve(__dirname, 'src');
 //百度统计
 const statsArr = {
     'bj':'93690926399c3c2010ef1598305646ff', //北京移动
@@ -15,30 +16,46 @@ const statsArr = {
     'zjyd': 'd703449a63eadad220b77508bbd3b2f6',//浙江移动
     'hailan':'d56398baa36600d0b4ab251b16f42dbe'//海澜之家
 };
+let defaultConfig = {
+    stats: "", //统计代码
+    cdnURL: "", //cdn url
+    apiURL: "", //api url
+    wxConfig: "", //wx_config.php
+    version: "", //版本号
+    vconsole: true
+},
+testConfig = Object.assign({},defaultConfig,{
+    apiURL: "api.php",
+    wxConfig: "/cache/wx_config.php",
+    vconsole:''
+}),
+prodConfig = Object.assign({},defaultConfig,{
+    apiURL: "api.php",
+    wxConfig: "/cache/wx_config.php",
+    vconsole:''
+});
+
 module.exports = {
     //开发环境
-    dev: {
-        stats: "", //统计代码
-        cdnURL: "", //cdn url
-        apiURL: "", //api url
-        wxConfig: "", //wx_config.php
-        version: "", //版本号
-        vconsole: true
-    },
+    dev: defaultConfig,
     //测试环境
-    testing: {
-        stats: "",
-        cdnURL: "",
-        apiURL: "api.php",
-        wxConfig: "/cache/wx_config.php",
-        version: ""
-    },
+    testing:testConfig,
     //生产环境
-    prod: {
-        stats: "", //统计代码
-        cdnURL: "", //cdn url
-        apiURL: "api.php",
-        wxConfig: "/cache/wx_config.php", //wx_config.php
-        version: "", //版本号
-    }
+    prod: prodConfig,
+    devTemplate:{
+        filename: 'index.html',
+        title: "开发环境",
+        template: path.resolve(src, "index.html"),
+        inject: "body",
+        chunks: ['index'],
+        hash: true
+    },
+    prodTemlate:{
+        filename: 'index.html',
+        title: "生产环境",
+        template: path.resolve(src, "index.html"),
+        inject: "body",
+        chunks: ['index'],
+        hash: true
+    },
 };
