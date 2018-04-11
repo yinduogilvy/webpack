@@ -1,14 +1,14 @@
-const noop = function(){},
-  eventDomain = document.location.href.substr(0,document.location.href.lastIndexOf("/")+1);
 import assign from "babel-runtime/core-js/object/assign";
+
 import css from "../css/mode.scss";
 
-if (process.env.NODE_ENV == 'prod'){
-    console.log = function() {};
-}
+process.env.NODE_ENV == 'prod' && (console.log = function() {});
 
 //Config
-var Config = BASE_CONFIG || {};
+const Config = BASE_CONFIG || {},
+noop = function(){},
+href = document.location.href,
+eventDomain = href.substr(0,href.lastIndexOf("/")+1);
 /*
 ** @Class:页面布局
 ** @params:config:Object 页面配置
@@ -54,7 +54,6 @@ var Page = (function(){
         $("body").append(otips);
       }
       this.loadRes();
-
       this.initShareConfig();
     },
     getHash: function(){
