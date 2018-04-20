@@ -9,7 +9,7 @@ const statsArr = {
     'jsyd':'05ee5754fe6a161e5576ba19582322df',//江苏移动
     'zq':'239cdedf188ab632c9b176946ccad7fb',//中移动政企 
     'dx':'fea81dc154ca9556f519c5dc6c1d771c',//电信
-    'migu':' 6cca1164ad57902944130e5193cec5cc',//咪咕
+    'migu':'6cca1164ad57902944130e5193cec5cc',//咪咕
     'migudm': 'eac030d4614f12ab54ac69f216ee6528',//咪咕圈圈
     'brookstone': 'c69e413e8efd2eb964460c9b5ac9b5ac', //宏图三胞
     'hnyd':'b027ab295592b33c732f8e16cdb7b092',//湖南移动
