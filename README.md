@@ -28,7 +28,7 @@
 | pause()              | 暂停序列帧播放          | | |
 | stop()               | 停止序列帧播放          | | | 
 
-| 事件                 | 名称                  |   参数      |              示例  |
+| 事件                 | 名称                  |   说明      |              示例  |
 | ---------            |:---------------       |:-------------|:-------------|      
 | frame:playing      | 序列帧开始播放    |  | |
 | frame:pause          | 序列帧暂停播放          | | |
@@ -45,7 +45,7 @@
 | direction             | 切换方向 :vertical 或 v 为上下滑动，horizontal 或 h 为左右滑动           | vertical;          | 否 | 
 | currentClass             | 当前屏的class (方便实现内容的进场动画)            | current          | 否 | 
 | rememberLastVisited             | 记住上一次访问结束后的索引值，可用于实现页面返回后是否回到上次访问的页面            | true          | 否 | 
-| animationPlayOnce             | 切换页面时，动画只执行一次            | function(){}          | 是否 | 
+| animationPlayOnce             | 切换页面时，动画只执行一次            | function(){}          | 否 | 
 | oninit             | 初始化完成时的回调            | function(){}          | 否 | 
 | onbeforechange             | 开始切换前的回调            | function(){}          | 否 | 
 | onchange             | 每一屏切换完成时的回调            | function(){}          | 否 | 
@@ -62,11 +62,56 @@
 | prev()              | 返回上一屏          | | |
 | moveTo(index[,isEase])               | 跳到指定位置          | index:跳到指定位置:<br/>isEase：是否需耀动画 默认:false需要动画 不需要动画:true | | 
 
-| 事件                 | 名称                  |   参数      |              示例  |
+
+## ResLoader.js 资源加载类
+
+
+| 属性                 | 名称                  |   默认值    |              是否必须  |
+| ---------            |:---------------       |:-------------|:-------------|    
+| cdn                 |  cdn地址                 |  ""      | 否 |
+| version             | 图片资源版本号           | ""          | 否 | 
+
+
+| 方法                 | 名称                  |   参数      |              示例  |
 | ---------            |:---------------       |:-------------|:-------------|      
-| frame:playing      | 序列帧开始播放    |  | |
-| frame:pause          | 序列帧暂停播放          | | |
-| frame:stop            | 序列帧停止播放          | | | 
+| addImage(img[,callback])  | 添加图片   |  img:String 图片地址,会将图片名称以及后缀名处理形成键值 ，方便获取 <br/> callback:function : 将处理后的图片(与cdn和version结合)  |  bg.jpg 会转为 bg_jpg 以供 getImage使用|
+| getImage(key)              | 获取图片          | 图片的键值 | 会返回img元素 |
+| start()               | 开始 加载资源          |  | | 
+
+
+| 事件                 | 名称                  |   说明      |              示例  |
+| ---------            |:---------------       |:-------------|:-------------|      
+| res:loadProgress     | 资源加载进度    | 参数:[{total:总资源,loaded:已经加载的资源}]  | |
+| res:loadComplete          | 资源加载完成          | | |
+
+
+## PageResLoader.js HTML页面资源加载类 继承 ResLoader
+
+| 事件                 | 名称                  |   说明      |              示例  |
+| ---------            |:---------------       |:-------------|:-------------|      
+| pageRes:loadProgress     | 资源加载进度    | 参数:[{total:总资源,loaded:已经加载的资源}]  | |
+| pageRes:loadComplete          | 资源加载完成          | | |
+
+
+## WXShare.js 微信分享
+
+| 属性                 | 名称                  |   默认值    |              是否必须  |
+| ---------            |:---------------       |:-------------|:-------------|    
+| shareAppTitle                 |  分享到朋友标题                 |  ""      | 否 |
+| shareAppDesc             | 分享到朋友摘要           | ""          | 否 | 
+| shareTimelineTitle             | 分享到朋友圈标题           | shareAppTitle         | 否 | 
+| shareTimelineDesc             | 分享到朋友圈摘要           | shareAppDesc          | 否 | 
+| shareShareAppComplete             | 分享到朋友回调函数           | ""          | 否 | 
+| shareTimelineComplete             | 分享到朋友圈回调函数           | ""          | 否 | 
+| eventDomain             | 分享链接           | 当前地址          | 否 | 
+| cdn             | cdn            | ""          | 否 | 
+| version             | 版本号           | ""          | 否 | 
+| shareImage             | 分享图片           | ""          | 否 | 
+
+
+| 事件                 | 名称                  |   说明      |              示例  |
+| ---------            |:---------------       |:-------------|:-------------|      
+| shareSuccess   | 分享成功    | 参数:[,{type:分享类型}}]   | {type:"app"}:分享朋友<br/>{type:"timeline"}:分享朋友圈 |
 
 
 

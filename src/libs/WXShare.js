@@ -40,11 +40,11 @@ export default class WXShare extends EventClass{
             imgUrl:this.shareImage,
             TimelineSuccess:()=>{
                 this.shareTimelineComplete();
-                this.trigger("shareSuccess:timeline");
+                this.trigger("shareSuccess",{type:'timeline'});
             },
             ShareAppMessageSuccess:()=>{
                 this.shareShareAppComplete();
-                this.trigger("shareSuccess:app");
+                this.trigger("shareSuccess",{type:'app'});
             }
         }
     }
