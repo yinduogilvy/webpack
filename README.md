@@ -12,6 +12,28 @@
 | off([eventName][,fn])| 解绑事件              | eventName :<String>事件名称; fn:回调函数| object.off() 解绑所有事件;<br/>2.object.off(event)解绑某个事件;<br/>3.object.off(event,fn) 解绑指定的回调函数 |
 | unbind(eventName,fn) | off的别名               |  参照off方法  | |
 
+
+## Frame.js 序列帧类
+
+| 属性                 | 名称                  |   默认值    |              是否必须  |
+| ---------            |:---------------       |:-------------|:-------------|    
+| rate                 | 帧速率                |  60           | 否 |
+|  wrapper             | 序列帧父级            | null          | 是 | 
+
+
+
+| 方法                 | 名称                  |   参数      |              示例  |
+| ---------            |:---------------       |:-------------|:-------------|      
+| play([index])        | 从指定位置播放序列帧    | index:<Number> | |
+| pause()              | 暂停序列帧播放          | | |
+| stop()               | 停止序列帧播放          | | | 
+
+| 事件                 | 名称                  |   参数      |              示例  |
+| ---------            |:---------------       |:-------------|:-------------|      
+| frame:playing      | 序列帧开始播放    |  | |
+| frame:pause          | 序列帧暂停播放          | | |
+| frame:stop            | 序列帧停止播放          | | | 
+
 ## webpack配置文件
 * webpack.base.js
 * webpack.devepment.js
