@@ -1,4 +1,6 @@
-const toString = Object.prototype.toString;
+const toString = Object.prototype.toString,
+href = document.location.href,
+eventDomain = href.substr(0,href.lastIndexOf("/")+1);
 function isFunction(value){
     return typeof value =="function" || toString.call(value)=="[object Function]";
 }
@@ -12,6 +14,7 @@ function isString(value){
 function isArray(value){
     return (Array.isArray && Array.isArray(value)) || toString.call(value)=="[object Array]";
 }
+function noop(){}
 
 //输入框进行判断
 function checkVaild(){
@@ -48,11 +51,20 @@ function getQuery(query){
     return params;
 }
 
+
+function getHash(){
+    let $script = $('script[src*="index"]'),
+    hash = ($script.attr('src').split('?')).pop();
+    return hash;
+}
+
 export {
     isFunction,
     isObject,
     isString,
     isArray,
     checkVaild,
-    getQuery
+    getQuery,
+    noop,
+    eventDomain
 }

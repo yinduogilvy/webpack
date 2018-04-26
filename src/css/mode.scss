@@ -13,7 +13,9 @@ body {
   height:100%;
   overflow:hidden!important;
 }
-
+[data-src]{
+  background-repeat: no-repeat;
+}
 .loading {
     position: fixed;
     width: 100%;

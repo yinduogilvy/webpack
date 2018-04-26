@@ -1,13 +1,12 @@
 import Promise from "babel-runtime/core-js/promise";
-
 import EventClass from "../libs/EventClass.js";
-
+import {noop} from "./Util.js";
 /**
  * 
  * 资源加载器
  */
 export default class ResLoader extends EventClass{
-    constructor(cdn="",version=""){
+    constructor({cdn="",version=""}={}){
         super(cdn,version);
         this.resources = [];
         this.promises = [];
@@ -18,7 +17,7 @@ export default class ResLoader extends EventClass{
         this.version = version;
         this.resObject = {};
     }
-    addImage(img){
+    addImage(img,callback=noop){
         let {regxCommon,regxBase64,resources,cdn,version} = this,url = "",key = "";
         if(regxCommon.test(img)){
             regxCommon.lastIndex = 0;
@@ -34,8 +33,8 @@ export default class ResLoader extends EventClass{
             console.error(`It must be an Image : jpeg or jpg or png or gif or webp or base64`);
         }
         resources.push(url);
+        callback(url);
         return this;
- 
     }
     getImage(key){
        return  this.resObject[key];
@@ -43,6 +42,7 @@ export default class ResLoader extends EventClass{
     start(){
         let {loaded,resources,promises,trigger,regxCommon,regxBase64} = this,total = resources.length;
         let self = this;
+        if(resources.length<1) return this.trigger("res:loadComplete"),false;
         resources.forEach(res=>{
 
             let promise = new Promise((reslove,reject)=>{
