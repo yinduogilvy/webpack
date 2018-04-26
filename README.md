@@ -17,14 +17,14 @@
 
 | 属性                 | 名称                  |   默认值    |              是否必须  |
 | ---------            |:---------------       |:-------------|:-------------|    
-| rate                 | 帧速率                |  60           | 否 |
+| rate                 | 帧速率                 |  60           | 否 |
 |  wrapper             | 序列帧父级            | null          | 是 | 
 
 
 
 | 方法                 | 名称                  |   参数      |              示例  |
 | ---------            |:---------------       |:-------------|:-------------|      
-| play([index])        | 从指定位置播放序列帧    | index:<Number> | |
+| play([index])        | 从指定位置播放序列帧    | index:<Number>指定播放位置 | |
 | pause()              | 暂停序列帧播放          | | |
 | stop()               | 停止序列帧播放          | | | 
 
@@ -33,6 +33,43 @@
 | frame:playing      | 序列帧开始播放    |  | |
 | frame:pause          | 序列帧暂停播放          | | |
 | frame:stop            | 序列帧停止播放          | | | 
+
+
+
+## Page.js 序列帧类
+
+
+| 属性                 | 名称                  |   默认值    |              是否必须  |
+| ---------            |:---------------       |:-------------|:-------------|    
+| pages                 | 需要切换的所有屏                 |  $('.page')           | 否 |
+| direction             | 切换方向 :vertical 或 v 为上下滑动，horizontal 或 h 为左右滑动           | vertical;          | 否 | 
+| currentClass             | 当前屏的class (方便实现内容的进场动画)            | current          | 否 | 
+| rememberLastVisited             | 记住上一次访问结束后的索引值，可用于实现页面返回后是否回到上次访问的页面            | true          | 否 | 
+| animationPlayOnce             | 切换页面时，动画只执行一次            | function(){}          | 是否 | 
+| oninit             | 初始化完成时的回调            | function(){}          | 否 | 
+| onbeforechange             | 开始切换前的回调            | function(){}          | 否 | 
+| onchange             | 每一屏切换完成时的回调            | function(){}          | 否 | 
+| onSwipeUp             | swipeUp 回调            | function(){}          | 否 |
+| onSwipeDown             | swipeDown 回调            | function(){}          | 否 |
+| onSwipeLeft             | swipeLeft 回调            | function(){}          | 否 | 
+| onSwipeRight             | swipeRight 回调            | function(){}          | 否 |
+
+
+
+| 方法                 | 名称                  |   参数      |              示例  |
+| ---------            |:---------------       |:-------------|:-------------|      
+| next()        | 切换到下一屏    | index:<Number>指定播放位置 | |
+| prev()              | 返回上一屏          | | |
+| moveTo(index[,isEase])               | 跳到指定位置          | index:跳到指定位置:<br/>isEase：是否需耀动画 默认:false需要动画 不需要动画:true | | 
+
+| 事件                 | 名称                  |   参数      |              示例  |
+| ---------            |:---------------       |:-------------|:-------------|      
+| frame:playing      | 序列帧开始播放    |  | |
+| frame:pause          | 序列帧暂停播放          | | |
+| frame:stop            | 序列帧停止播放          | | | 
+
+
+
 
 ## webpack配置文件
 * webpack.base.js
