@@ -97,9 +97,9 @@
 
 | 属性                 | 名称                  |   默认值    |              是否必须  |
 | ---------            |:---------------       |:-------------|:-------------|    
-| shareAppTitle                 |  分享到朋友标题                 |  ""      | 否 |
-| shareAppDesc             | 分享到朋友摘要           | ""          | 否 | 
-| shareTimelineTitle             | 分享到朋友圈标题           | shareAppTitle         | 否 | 
+| shareAppTitle                 |  分享到朋友标题                 |  ""      | 是 |
+| shareAppDesc             | 分享到朋友摘要           | ""          | 是 | 
+| shareTimelineTitle             | 分享到朋友圈标题           | 取shareAppTitle值         | 否 | 
 | shareTimelineDesc             | 分享到朋友圈摘要           | shareAppDesc          | 否 | 
 | shareShareAppComplete             | 分享到朋友回调函数           | ""          | 否 | 
 | shareTimelineComplete             | 分享到朋友圈回调函数           | ""          | 否 | 
