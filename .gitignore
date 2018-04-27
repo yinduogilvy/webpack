@@ -1,6 +1,10 @@
 */node_modules/
-./css/
-./js/
-./img/
-./index.html
+css/
+js/
+img/
+index.html
+!source/css
+!source/js
+!source/img
+!source/index.html
 
