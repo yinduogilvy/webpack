@@ -101,9 +101,9 @@
 | shareAppDesc             | 分享到朋友摘要           | ""          | 是 | 
 | shareTimelineTitle             | 分享到朋友圈标题           | 取shareAppTitle值         | 否 | 
 | shareTimelineDesc             | 分享到朋友圈摘要           | shareAppDesc          | 否 | 
-| shareShareAppComplete             | 分享到朋友回调函数           | ""          | 否 | 
+| shareAppComplete             | 分享到朋友回调函数           | ""          | 否 | 
 | shareTimelineComplete             | 分享到朋友圈回调函数           | ""          | 否 | 
-| eventDomain             | 分享链接           | 当前地址          | 否 | 
+| shareLink             | 分享链接           | 当前地址          | 否 | 
 | cdn             | cdn            | ""          | 否 | 
 | version             | 版本号           | ""          | 否 | 
 | shareImage             | 分享图片           | ""          | 否 | 
