@@ -1,5 +1,5 @@
 const path = require('path'),
-    dist = path.resolve(__dirname, "..", 'dist'),
+    dist = path.resolve(__dirname, "../../"),
     src = path.resolve(__dirname, "..", 'src'),
     webpack = require("webpack"),
     WriteFileWebpackPlugin = require('write-file-webpack-plugin'),
@@ -87,7 +87,12 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin([path.resolve(__dirname,"..",'dist')]),
+        new CleanWebpackPlugin([path.resolve(__dirname,"../..")],{
+            root:path.resolve(__dirname,"../../../"),
+            exclude:['source',"*.php",".git",".gitignore"],
+            verbose:true,
+            dry:false
+        }),
         new ExtractTextWebpackPlugin("css/mode.css"),
         new CopyWebpackPlugin(
             [
