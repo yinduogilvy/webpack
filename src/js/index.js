@@ -1,14 +1,16 @@
 
 import css from "../css/mode.scss";
+import UploadFile from "../libs/UploadFile.js";
 
 import WXShare from "../libs/WXShare.js";
 import PageResLoader from "../libs/PageResLoader.js";
 import Page from "../libs/Page.js";
 
-/*
+
 new PageResLoader().on("pageRes:loadComplete",function(e){
     $("body").addClass("loaded");
 });
+/*
 new Page();
 const wx = new WXShare({
     shareAppTitle:"唧唧复唧唧",
@@ -38,3 +40,17 @@ $(document).on("click",function(){
 
 
 */
+
+// let uf = new UploadFile({
+
+// });
+// uf.on("loadstart",function(){
+//     console.log("图片开始上传")
+// });
+// uf.on("loadprogress",function(data){
+//     console.log(data)
+// });
+// uf.on("loadfinish",function(data){
+//     console.log("上传上传成功");
+//     console.log(data);
+// })
