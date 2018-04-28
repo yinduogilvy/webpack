@@ -1,6 +1,6 @@
 import EventClass from "../libs/EventClass.js";
 import assign from "babel-runtime/core-js/object/assign";
-import {getHash,eventDomain,noop} from "./Util.js";
+import {getHash,eventDomain,noop,getCdn} from "./Util.js";
 /**
  * 
  *  @description:微信分享类
@@ -25,7 +25,7 @@ export default class WXShare extends EventClass{
         this.shareAppComplete = shareAppComplete;
         this.shareTimelineComplete = shareTimelineComplete;
         this.eventDomain = shareLink || eventDomain ;
-        this.shareImage = `${cdn?cdn:this.eventDomain}img/share.jpg${version?'?'+version:''}`;
+        this.shareImage = `${cdn?cdn:getCdn()}img/share.jpg${version?'?'+version:''}`;
         this.initShare();
 
     }

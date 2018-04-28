@@ -10,10 +10,11 @@ function isObject(value){
 function isString(value){
     return typeof value =="string" || toString.call(value)=="[object String]";
 }
-
 function isArray(value){
     return (Array.isArray && Array.isArray(value)) || toString.call(value)=="[object Array]";
 }
+
+
 function noop(){}
 
 //输入框进行判断
@@ -57,7 +58,9 @@ function getHash(){
     hash = ($script.attr('src').split('?')).pop();
     return hash;
 }
-
+function getCdn(){
+    return $("base").attr("href") ||  eventDomain;
+}
 export {
     isFunction,
     isObject,
@@ -66,5 +69,6 @@ export {
     checkVaild,
     getQuery,
     noop,
-    eventDomain
+    eventDomain,
+    getCdn
 }

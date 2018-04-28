@@ -1,6 +1,6 @@
 import Promise from "babel-runtime/core-js/promise";
 import EventClass from "../libs/EventClass.js";
-import {noop} from "./Util.js";
+import {noop,getCdn} from "./Util.js";
 /**
  * 
  * 资源加载器
@@ -13,7 +13,7 @@ export default class ResLoader extends EventClass{
         this.loaded = 0;
         this.regxCommon = /\.(jpeg|jpg|png|gif|webp)$/ig;
         this.regxBase64 = /data:image\/(jpeg|jpg|png|gif);base64,/ig;
-        this.cdn = cdn;
+        this.cdn = cdn || getCdn();
         this.version = version;
         this.resObject = {};
     }
