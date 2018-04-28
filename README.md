@@ -131,6 +131,36 @@
 | loadfinish | 图片上传成功  | [{result}] || 
 
 
+
+## alloy_finger.js 多指触碰类
+
+```
+var af = new AlloyFinger(element, {
+        touchStart: function () { },
+        touchMove: function () { },
+        touchEnd:  function () { },
+        touchCancel: function () { },
+        multipointStart: function () { },
+        multipointEnd: function () { },
+        tap: function () { },
+        doubleTap: function () { },
+        longTap: function () { },
+        singleTap: function () { },
+        rotate: function (evt) {
+            console.log(evt.angle);
+        },
+        pinch: function (evt) {
+            console.log(evt.zoom);
+        },
+        pressMove: function (evt) {
+            console.log(evt.deltaX);
+            console.log(evt.deltaY);
+        },
+        swipe: function (evt) {
+            console.log("swipe" + evt.direction);
+        }
+    });
+```
 # 用于其他信息说明
 
 
