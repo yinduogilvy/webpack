@@ -5,11 +5,14 @@ import UploadFile from "../libs/UploadFile.js";
 import WXShare from "../libs/WXShare.js";
 import PageResLoader from "../libs/PageResLoader.js";
 import Page from "../libs/Page.js";
+import {cdn,version} from "../libs/Util.js";
+console.log(version)
 
-
-
-
-new PageResLoader().on("pageRes:loadComplete",function(e){
+new PageResLoader({
+    cdn,
+    version,
+    origin:"" // 用于跨域设置
+}).on("pageRes:loadComplete",function(e){
     $("body").addClass("loaded");
 });
 

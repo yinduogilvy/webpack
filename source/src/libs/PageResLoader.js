@@ -7,8 +7,8 @@
 
 
  export default class PageResLoader extends ResLoader{
-     constructor({cdn="",version=""}={}){
-        super({cdn,version});
+     constructor({cdn="",version="",origin=""}={}){
+        super({cdn,version,origin});
 
         this.init();    
      }

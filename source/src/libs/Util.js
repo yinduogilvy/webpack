@@ -58,9 +58,13 @@ function getHash(){
     hash = ($script.attr('src').split('?')).pop();
     return hash;
 }
-function getCdn(){
+let cdn = (function getCdn(){
     return $("base").attr("href") ||  eventDomain;
-}
+})();
+
+let version = (function(){
+    return (document.querySelector("[src*='index.js']").getAttribute("src").split("?"))[1];
+})();
 export {
     isFunction,
     isObject,
@@ -70,5 +74,6 @@ export {
     getQuery,
     noop,
     eventDomain,
-    getCdn
+    cdn,
+    version
 }

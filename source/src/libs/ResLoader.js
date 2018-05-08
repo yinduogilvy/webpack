@@ -1,20 +1,21 @@
 import Promise from "babel-runtime/core-js/promise";
 import EventClass from "../libs/EventClass.js";
-import {noop,getCdn} from "./Util.js";
+import {noop} from "./Util.js";
 /**
  * 
  * 资源加载器
  */
 export default class ResLoader extends EventClass{
-    constructor({cdn="",version=""}={}){
-        super(cdn,version);
+    constructor({cdn="",version="",origin=""}={}){
+        super(cdn,version,origin);
         this.resources = [];
         this.promises = [];
         this.loaded = 0;
         this.regxCommon = /\.(jpeg|jpg|png|gif|webp)$/ig;
         this.regxBase64 = /data:image\/(jpeg|jpg|png|gif);base64,/ig;
-        this.cdn = cdn || getCdn();
+        this.cdn = cdn;
         this.version = version;
+        this.origin = origin;
         this.resObject = {};
     }
     addImage(img,callback=noop){
@@ -40,17 +41,19 @@ export default class ResLoader extends EventClass{
        return  this.resObject[key];
     }
     start(){
-        let {loaded,resources,promises,trigger,regxCommon,regxBase64} = this,total = resources.length;
+        let {origin,loaded,resources,promises,trigger,regxCommon,regxBase64} = this,total = resources.length;
         let self = this;
         if(resources.length<1) return this.trigger("res:loadComplete"),false;
+    
         resources.forEach(res=>{
 
             let promise = new Promise((reslove,reject)=>{
                 let img = new Image;
-                img.crossOrigin =  "*";
-
+                if(origin){
+                    img.crossOrigin = origin;
+                }
                 img.onload = img.onerror = function(){
-                    
+                    img.onload = img.onerror = null;
                     loaded++;
                     self.trigger("res:loadProgress",{
                         loaded,
