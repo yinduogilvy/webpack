@@ -43,7 +43,7 @@ export default class ResLoader extends EventClass{
     start(){
         let {origin,loaded,resources,promises,trigger,regxCommon,regxBase64} = this,total = resources.length;
         let self = this;
-        if(resources.length<1) return this.trigger("res:loadComplete"),false;
+        //if(resources.length<1) return this.trigger("res:loadComplete"),false;
     
         resources.forEach(res=>{
 
