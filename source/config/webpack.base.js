@@ -6,7 +6,11 @@ const path = require('path'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
     ExtractTextWebpackPlugin = require("extract-text-webpack-plugin"),
     HtmlWebpackPlugin = require("html-webpack-plugin"),
-    CleanWebpackPlugin = require('clean-webpack-plugin');
+    CleanWebpackPlugin = require('clean-webpack-plugin'),
+    config = require("../config.js");
+
+let {devTemplate,prodTemlate} = config;
+
 
 module.exports = {
     entry: {
@@ -91,7 +95,8 @@ module.exports = {
             path.resolve(dist,"img"),
             path.resolve(dist,"css"),
             path.resolve(dist,"js"),
-            path.resolve(dist,"index.html"),
+            path.resolve(dist,devTemplate.filename),
+            path.resolve(dist,prodTemlate.filename),
         ],{
             root:path.resolve(__dirname,"../../../"),
             exclude:['source',"*.php",".git",".gitignore","README.md"],
