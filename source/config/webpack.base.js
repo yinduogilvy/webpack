@@ -87,7 +87,12 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin([path.resolve(__dirname,"../..")],{
+        new CleanWebpackPlugin([
+            path.resolve(dist,"img"),
+            path.resolve(dist,"css"),
+            path.resolve(dist,"js"),
+            path.resolve(dist,"index.html"),
+        ],{
             root:path.resolve(__dirname,"../../../"),
             exclude:['source',"*.php",".git",".gitignore","README.md"],
             verbose:true,
