@@ -21,7 +21,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.mp3$/,
+                test: /\.(mp3|ttf|eot|woff|svg)$/,
                 exclude: /(node_modules|bower_components)/,
                 use: [{
                     loader: "file-loader",
