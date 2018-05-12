@@ -1,21 +1,26 @@
 import Promise from "babel-runtime/core-js/promise";
 import EventClass from "../libs/EventClass.js";
-import {noop,getCdn} from "./Util.js";
+import {noop,cdn} from "./Util.js";
 /**
  * 
  * 资源加载器
  */
 export default class ResLoader extends EventClass{
-    constructor({cdn="",version=""}={}){
+    constructor({cdn="",version="",origin=""}={}){
         super(cdn,version);
-        this.resources = [];
-        this.promises = [];
+        
         this.loaded = 0;
         this.regxCommon = /\.(jpeg|jpg|png|gif|webp)$/ig;
         this.regxBase64 = /data:image\/(jpeg|jpg|png|gif);base64,/ig;
-        this.cdn = cdn || getCdn();
-        this.version = version;
-        this.resObject = {};
+        this.cdn = cdn; //CDN 加速
+        this.version = version;//版本号
+        this.origin=  origin ; //是否跨域请求
+
+        this.resources = []; //需要加载资源组
+        this.promises = []; // promise 请求
+        this.resObject = {}; //处理后的URL 的集合
+        this.imgObject = {};//请求成功后的图片集合
+
     }
     addImage(img,callback=noop){
         let {regxCommon,regxBase64,resources,cdn,version} = this,url = "",key = "";
@@ -37,20 +42,44 @@ export default class ResLoader extends EventClass{
         return this;
     }
     getImage(key){
-       return  this.resObject[key];
+       return  this.imgObject[key];
+    }
+    getUrl(key){
+        return this.resObject[key];
+    }
+    getKey(url){
+        let {regxCommon,regxBase64} = this;
+        let path = "";
+        if(url.indexOf("?")>=0){
+            path = (url.split("?"))[0];
+        }
+        if(regxCommon.test(path)){
+            regxCommon.lastIndex = 0;
+            path = path.slice(path.lastIndexOf("/")+1).replace(".","_");
+            return path;
+        }else if(regxBase64.test(path)){
+            regxBase64.lastIndex = 0;
+            return "base64";
+        }
+        
     }
     start(){
-        let {loaded,resources,promises,trigger,regxCommon,regxBase64} = this,total = resources.length;
+        let {origin,loaded,resources,promises,trigger,regxCommon,regxBase64} = this,total = resources.length;
         let self = this;
-        //if(resources.length<1) return this.trigger("res:loadComplete"),false;
         resources.forEach(res=>{
-
+            let  key =  this.getKey(res);
             let promise = new Promise((reslove,reject)=>{
                 let img = new Image;
-                //img.crossOrigin =  "*";
-
+                if(origin){
+                    img.crossOrigin =  origin;
+                }
                 img.onload = img.onerror = function(){
-                    
+                    if(key=="base64") {
+                        self.imgObject[key] = self.imgObject[key] || (self.imgObject[key]=[]);
+                        self.imgObject[key].push(this);
+                    }else {
+                        self.imgObject[key] = this;
+                    }
                     loaded++;
                     self.trigger("res:loadProgress",{
                         loaded,

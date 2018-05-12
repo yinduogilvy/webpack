@@ -26,7 +26,7 @@ function checkVaild(){
         var elem = vailds[i],
         	val = elem.value,
         	arg = $(elem).data("require"),
-        	regx = /^\/(.+)\/$/ig;
+        	regx = /^\/(.+)\/$/ig,
         	isPattern = regx.exec(arg),
         	isVaild =  isPattern ? isPattern[1]:'';
 
@@ -65,6 +65,11 @@ let cdn = (function getCdn(){
 let version = (function(){
     return (document.querySelector("[src*='index.js']").getAttribute("src").split("?"))[1];
 })();
+
+
+
+
+
 export {
     isFunction,
     isObject,

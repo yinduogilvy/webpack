@@ -252,8 +252,8 @@ export class YinduCanvas extends EventClass {
         }
         //console.log(this.name+"绘画");
     }
-    toDateURL(){
-        return this.$canvas.toDataURL("image/png");
+    toDateURL(type="image/png",quality=0.92){
+        return this.$canvas.toDataURL(type,quality);
     }
 }
 //位图
