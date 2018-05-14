@@ -2,72 +2,11 @@ import EventClass from "../libs/EventClass.js";
 import {isArray} from "../libs/Util.js";
 import Promise from "babel-runtime/core-js/promise";
 
-/**
- * 加载资源
- **/
-export class LoadRes extends EventClass{
-    constructor(res,base="",hash=""){
-        super();
-        //资源组
-        this.resGroup = [];
-        this.$resource = {};
-        this.$base = base;
-        this.$hash = hash;
-        if(isArray(res)){
-            this.resGroup = [...res];
-        }else {
-            this.resGroup.push(res);
-        }
-    }
-    getRes(key){
-        let {$resource} = this;
-        return $resource[key];
-    }
-    start(){
-        let {resGroup} = this,total = resGroup.length,loaded = 0,promiseArr = [];
-        this.trigger("loadRes:start",{
-            total,
-            loaded
-        });
-
-        resGroup.forEach((item,index)=>{
-            let promise = new Promise((resolve,reject)=>{
-                let img = new Image;
-                let key = item.replace(/\./ig,"_");
-                
-                let self = this;
-                img.crossOrigin = "*";
-                img.onload = img.onerror = function(){
-                    self.$resource[key] = img;
-                    img.onload = img.onerror = null;
-                    loaded++;
-                    self.trigger("loadRes:progress",{
-                        total,
-                        loaded
-                    });
-
-                    resolve();
-                }
-
-                img.src = this.$base+item+(this.$hash?`?${this.$hash}`:"");
-            });
-            promiseArr.push(promise);
-        });
-
-        Promise.all(promiseArr).then((data)=>{
-            this.trigger("loadRes:complete",{
-                total,
-                loaded
-            });
-        })
-
-    }
-    
-}
 
 /**
  * 基类库
  **/
+
 export class YinduCanvas extends EventClass {
     constructor(width,height){
         super();
@@ -99,6 +38,7 @@ export class YinduCanvas extends EventClass {
         this.$scaleX = 1;
         this.$scaleY = 1;
         this.$rotation  = 0;
+        this.$mask = null;
 
     }
 
@@ -200,6 +140,13 @@ export class YinduCanvas extends EventClass {
         return  this.$rotation;
     }
 
+    set mask(value) {
+        if(this.mask!=value){
+            this.$mask = value;
+        }
+        
+    }
+
 
 
 
@@ -241,7 +188,6 @@ export class YinduCanvas extends EventClass {
         
         for(let child of this.$children){
             let {$canvas,$width,$height,$x,$y,$anchorOffsetX,$anchorOffsetY,$scaleX,$scaleY,$rotation} = child;
-
             this.$ctx.save();
             this.$ctx.translate($x,$y);
             this.$ctx.rotate(Math.PI*$rotation/180);
@@ -250,9 +196,10 @@ export class YinduCanvas extends EventClass {
             this.$ctx.drawImage($canvas,-1 * $anchorOffsetX,-1 * $anchorOffsetY,$width,$height);
             this.$ctx.restore();
         }
-        //console.log(this.name+"绘画");
+
+        
     }
-    toDateURL(type="image/png",quality=0.92){
+    toDataURL(type="image/png",quality=0.92){
         return this.$canvas.toDataURL(type,quality);
     }
 }
@@ -276,11 +223,82 @@ export class Bitmap extends YinduCanvas {
         return this.$texture;
     }
     draw(){
-        this.clear();
+        super.draw();
         this.$ctx.drawImage(this.$texture,0,0,this.$width,this.$height);
+        if(this.$mask){
+            let $mask = this.$mask,$ctx = this.$ctx;
+            $mask.draw();
+            $ctx.save();
+            $ctx.globalCompositeOperation = "destination-in";
+            $ctx.drawImage($mask.$canvas,$mask.x,$mask.y,$mask.width,$mask.height);
+            $ctx.restore();
 
+        }
     }
 }
+
+
+/* 矢量图 */
+export class Sprite extends YinduCanvas {
+    constructor(width,height){
+        super(width,height);
+    }
+}
+
+export class Circle extends YinduCanvas{
+    constructor(r,startAngel = 0,deg=180,clockwise=false){
+        super();
+        this.$r = r;
+        this.$deg = Math.PI *(deg+startAngel)/180;
+        this.$startAngel = Math.PI * startAngel/180;
+        this.$clockwise =  clockwise;
+        this.$canvas.width = this.$canvas.height = this.$width = this.$height = 2*r;
+        
+    }
+    draw(){
+        this.clear();
+        let {$ctx,$canvas,$r,$startAngel,$deg,$clockwise} = this;
+        $ctx.fillStyle = this.$fillStyleColor;
+        $ctx.beginPath();
+        // $ctx.moveTo($r,$r);
+        // $ctx.lineTo($r,$r+$r*Math.sin(this.$startAngel));
+        // $ctx.lineTo($r+$r*Math.cos(this.$deg+this.$startAngel),$r);
+        // $ctx.arc($r,$r,$r,$startAngel,$deg,$clockwise);
+        $ctx.arc($r,$r,$r,$startAngel,$deg,$clockwise)
+        $ctx.closePath();
+        $ctx.fill();
+       
+    }
+}
+// 圆角
+export class RectRound extends YinduCanvas {
+    constructor(width,height,round){
+        super(width,height,round);
+        this.$round = round;
+    }
+    handleDeg(deg){
+        return Math.PI*deg/180;
+    }
+    draw(){
+        this.clear();
+        let {$canvas,$ctx,$width,$height,$round,$fillStyleColor,handleDeg} = this;
+        $ctx.fillStyle = $fillStyleColor;
+        $ctx.beginPath();
+        $ctx.arc($round,$round,$round,handleDeg(90),handleDeg(270));
+        $ctx.closePath();
+        $ctx.fill();
+        $ctx.fillRect($round,0,$width-2*$round,$height);
+        $ctx.beginPath();
+        $ctx.arc($width - $round,$round,$round,handleDeg(90),handleDeg(270),true);
+        $ctx.closePath();
+        $ctx.fill();
+    }
+
+    
+
+}
+
+
 //文字
 export class Front extends YinduCanvas{
     constructor(width,height){
@@ -292,6 +310,7 @@ export class Front extends YinduCanvas{
         this.$fontColor = "#000";
         this.$fontText = "";
         this.$fontFamily = "黑体";
+        this.$textAlign = "";
     }
     set fontSize(value){
         if(this.$fontSize != value){
@@ -327,17 +346,33 @@ export class Front extends YinduCanvas{
         return this.$fontFamily;
     }
 
+    set textAlign(value){
+        if(this.$textAlign!=value){
+            this.$textAlign = value;
+        }
+    }
+
 
     draw(){
         let {$ctx,$canvas} = this,font =  `normal normal bold ${this.$fontSize}px  ${this.fontFamily}`;
         $ctx.font = font;
-        $canvas.width = this.$width = $ctx.measureText(this.$fontText).width;
-        $canvas.height = this.$height = this.$fontSize*2;
+        let $fontWidth = $ctx.measureText(this.$fontText).width;
+        $canvas.width = this.$width = this.$width || $fontWidth ;
+        $canvas.height = this.$height = this.$height || this.$fontSize*2;
         this.clear();
         $ctx.fillStyle = this.$fontColor;
         $ctx.textBaseline = "top";
         $ctx.font = font;
-        $ctx.fillText(this.$fontText,0,0);
+        let $x = 0;
+        if(this.$textAlign=="center") {
+            $x = (this.$width - $fontWidth)/2;
+        }else if(this.$textAlign=="left"){
+            $x = 0;
+        }else if(this.$textAlign=="right"){
+            $x = (this.$width - $fontWidth);
+        }
+        $ctx.fillText(this.$fontText,$x,0);
+
         
     }
 }

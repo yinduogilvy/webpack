@@ -49,7 +49,7 @@ export default class ResLoader extends EventClass{
     }
     getKey(url){
         let {regxCommon,regxBase64} = this;
-        let path = "";
+        let path = url;
         if(url.indexOf("?")>=0){
             path = (url.split("?"))[0];
         }
