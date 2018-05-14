@@ -14,7 +14,8 @@ const statsArr = {
     'brookstone': 'c69e413e8efd2eb964460c9b5ac9b5ac', //宏图三胞
     'hnyd':'b027ab295592b33c732f8e16cdb7b092',//湖南移动
     'zjyd': 'd703449a63eadad220b77508bbd3b2f6',//浙江移动
-    'hailan':'d56398baa36600d0b4ab251b16f42dbe'//海澜之家
+    'hailan':'d56398baa36600d0b4ab251b16f42dbe',//海澜之家,
+    'wanke':'1addd16a63e4fe70c4538f8b1c4e3903'//万科
 };
 let defaultConfig = {
     stats: "", //统计代码
@@ -30,6 +31,7 @@ testConfig = Object.assign({},defaultConfig,{
     vconsole:''
 }),
 prodConfig = Object.assign({},defaultConfig,{
+    stats:(statsArr['wanke']).trim(),
     apiURL: "api.php",
     wxConfig: "http://www.yindudigital.cn/cache/wx_config.php",
     vconsole:''
