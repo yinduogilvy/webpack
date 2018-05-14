@@ -29,7 +29,7 @@
     </div>
     <% if (htmlWebpackPlugin.options.wxConfig) { %>
     <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="http://www.yindudigital.com/cache/wx_config.php"></script>
+    <script src="<%=htmlWebpackPlugin.options.wxConfig %>"></script>
     <% } %>
     <% if (htmlWebpackPlugin.options.stats) { %>
     <!--统计代码-->

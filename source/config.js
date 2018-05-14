@@ -31,7 +31,7 @@ testConfig = Object.assign({},defaultConfig,{
 }),
 prodConfig = Object.assign({},defaultConfig,{
     apiURL: "api.php",
-    wxConfig: "/cache/wx_config.php",
+    wxConfig: "http://www.yindudigital.cn/cache/wx_config.php",
     vconsole:''
 });
 
