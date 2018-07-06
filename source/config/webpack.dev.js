@@ -1,3 +1,17 @@
+function getIPAddress(){
+    let interfaces = require("os").networkInterfaces();
+    for(let devName in interfaces) {
+        let interface = interfaces[devName];
+        for(let i=0,len = interface.length;i<len;i++){
+            let alias = interface[i];
+            if(alias.family=="IPv4" && alias.address !="127.0.0.1" && !alias.internal){
+                
+                return alias.address;
+            }
+        }
+    }
+}
+
 const path = require('path'),
     webpack = require("webpack"),
     merge = require('webpack-merge'),
@@ -14,7 +28,8 @@ module.exports = merge(common, {
     devServer: {
         contentBase: '../',
         open: true,
-        inline: true
+        inline: true,
+        host:getIPAddress()
     },
     plugins: [
         new webpack.DefinePlugin({
