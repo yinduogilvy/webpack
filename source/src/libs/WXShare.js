@@ -17,7 +17,7 @@ let g_cdn = cdn;
 
 
 export default class WXShare extends EventClass{
-    constructor({version="",shareAppTitle="",shareLink="",shareAppDesc="",shareTimelineTitle="",shareTimelineDesc="",shareAppComplete=noop,shareTimelineComplete=noop,cdn=""}={}){
+    constructor({version="",shareAppTitle="",shareLink="",shareAppDesc="",shareTimelineTitle="",shareImage="",shareAppComplete=noop,shareTimelineComplete=noop,cdn=""}={}){
         super();
         this.shareAppTitle = shareAppTitle;
         this.shareAppDesc = shareAppDesc;
@@ -26,7 +26,7 @@ export default class WXShare extends EventClass{
         this.shareAppComplete = shareAppComplete;
         this.shareTimelineComplete = shareTimelineComplete;
         this.eventDomain = shareLink || eventDomain ;
-        this.shareImage = `${cdn?cdn:g_cdn}img/share.jpg${version?'?'+version:''}`;
+        this.shareImage = shareImage || `${cdn?cdn:g_cdn}img/share.jpg${version?'?'+version:''}`;
         this.initShare();
 
     }
