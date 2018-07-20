@@ -38,6 +38,7 @@ export default class WXShare extends EventClass{
             title:this.shareTimelineTitle, //分享到朋友圈
             desc2:this.shareAppDesc, 
             desc1:this.shareTimelineDesc,
+            desc: this.shareAppDesc,
             link:this.eventDomain,
             img_url:this.shareImage,
             TimelineSuccess:()=>{
