@@ -1,10 +1,12 @@
 
 import "../css/mode.scss";
 
-import WXShare from "../libs/WXShare.js";
-import PageResLoader from "../libs/PageResLoader.js";
-import Page from "../libs/Page.js";
-import {cdn,version} from "../libs/Util.js";
+const {cdn,version} = require("yindu-util"),
+WXShare = require("yindu-wxshare"),
+PageResLoader = require("yindu-pageresloader"),
+Page = require("yindu-page");
+
+
 
 
 new PageResLoader({
@@ -15,7 +17,8 @@ new PageResLoader({
     $("body").addClass("loaded");
 });
 
+let p = new Page();
 
 
-let p = new Page()
+
 
