@@ -54,9 +54,9 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "yindu-wxshare": "^1.0.2",
-    "yindu-pageresloader":"^1.0.3",
-    "yindu-page":"^1.0.2",
-    "yindu-util":"^1.0.2"
+    "yindu-page": "^1.0.2",
+    "yindu-pageresloader": "^1.0.3",
+    "yindu-util": "^1.0.2",
+    "yindu-wxshare": "^1.0.2"
   }
 }

@@ -5,6 +5,7 @@ const webpack = require("webpack"),
     HtmlWebpackPlugin = require("html-webpack-plugin"),
     common = require('./webpack.base.js'),
     config = require('../config/dev.config.js');
+
 module.exports =  merge(common, {
     devtool: "inline-source-map",
     devServer: {

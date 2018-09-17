@@ -3,16 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title><%=htmlWebpackPlugin.options.title %></title>
-    <meta name="viewport" content="width=640,user-scalable=no"/>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <script src="//wximg.qq.com/wxp/libs/wxmoment/0.0.4/wxmoment.min.js"></script>    
     <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <script src="//res.wx.qq.com/open/libs/weuijs/1.1.2/weui.min.js"></script>
-    <% if (htmlWebpackPlugin.options.vconsole) { %>
-    <script src="http://www.yindudigital.com/public/vconsole.min.js"></script>
-    <% } %>
+    
     <% if (htmlWebpackPlugin.options.cdnURL) { %>
     <base href="<%= htmlWebpackPlugin.options.cdnURL %>">
     <% } %>
+
   </head>
   <body>
     <div class="loading">
@@ -20,6 +19,9 @@
     </div>
     <div class="wrapper">
       <div class="page page0">
+        
+      </div>
+      <div class="page page1">
         
       </div>
     </div>
@@ -43,5 +45,8 @@
     <!--统计代码-->
     <% } %>
   </body>
-
+  <% if (htmlWebpackPlugin.options.vconsole) { %>
+    <script src="https://cdn.bootcss.com/eruda/1.4.4/eruda.min.js"></script>
+    <script>eruda.init();</script>
+  <% } %>
 </html>
