@@ -6,11 +6,11 @@ const path = require('path'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
     ExtractTextWebpackPlugin = require("extract-text-webpack-plugin"),
     HtmlWebpackPlugin = require("html-webpack-plugin"),
-    CleanWebpackPlugin = require('clean-webpack-plugin'),
-    config = require("../config.js");
+    CleanWebpackPlugin = require('clean-webpack-plugin');
 
-let {devTemplate,prodTemlate} = config;
-
+const {templates:devTemplates} = require("../config/dev.config"),
+{templates:proTemplates} = require("../config/pro.config");
+const templates =devTemplates.concat(proTemplates);
 
 module.exports = {
     entry: {
@@ -95,8 +95,9 @@ module.exports = {
             path.resolve(dist,"img"),
             path.resolve(dist,"css"),
             path.resolve(dist,"js"),
-            path.resolve(dist,devTemplate.filename),
-            path.resolve(dist,prodTemlate.filename),
+            ...templates.map(template=>{
+                return path.resolve(dist,template['filename'])
+            })
         ],{
             root:path.resolve(__dirname,"../../../"),
             exclude:['source',"*.php",".git",".gitignore","README.md"],

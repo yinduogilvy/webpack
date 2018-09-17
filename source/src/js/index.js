@@ -1,7 +1,7 @@
 
 import "../css/mode.scss";
 
-const {cdn,version} = require("yindu-util"),
+const {cdn,version,eventDomain} = require("yindu-util"),
 WXShare = require("yindu-wxshare"),
 PageResLoader = require("yindu-pageresloader"),
 Page = require("yindu-page");
@@ -19,8 +19,9 @@ new PageResLoader({
 
 let p = new Page();
 
-console.log(process.env.NODE_ENV)
-
+if(NODE_ENV=="dev"){
+    console.log(1);
+}
 
 
 
