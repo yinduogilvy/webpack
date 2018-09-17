@@ -19,6 +19,8 @@ new PageResLoader({
 
 let p = new Page();
 
+console.log(process.env.NODE_ENV)
+
 
 
 

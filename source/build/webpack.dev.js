@@ -29,7 +29,13 @@ module.exports = merge(common, {
         contentBase: '../',
         open: true,
         inline: true,
-        host:getIPAddress()
+        host:getIPAddress(),
+        useLocalIp:false,
+        proxy:{
+            "/ajax.php":{
+                target:"http://192.168.5.89/study/yindu-cli/template/webpack/"
+            }
+        }
     },
     plugins: [
         new webpack.DefinePlugin({

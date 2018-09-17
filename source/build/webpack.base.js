@@ -68,7 +68,7 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
+                include:/(src|yindu-.*)/,
                 use: {
                     loader: 'babel-loader',
                     options: {
