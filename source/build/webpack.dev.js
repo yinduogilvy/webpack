@@ -20,7 +20,7 @@ module.exports =  merge(common, {
             'NODE_ENV': JSON.stringify(config["NODE_ENV"])
         }),
         ...config["templates"].map(template=>{
-            return  new HtmlWebpackPlugin(template)
+            return  new HtmlWebpackPlugin(merge(template,config))
         })
         
     ]

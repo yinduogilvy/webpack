@@ -3,7 +3,7 @@ const devConfig = require("./dev.config.js");
 const merge = require('webpack-merge');
 const path = require("path"),
 src = path.resolve(__dirname,"../src");
-module.exports = test = merge({
+module.exports  = merge({
     customizeArray(a,b,key){
         if(key==="templates"){
             return b;
@@ -18,5 +18,7 @@ module.exports = test = merge({
     NODE_ENV:"pro",
     proxy:null
 });
+
+
 
 
