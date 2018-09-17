@@ -19,9 +19,5 @@ new PageResLoader({
 
 let p = new Page();
 
-if(NODE_ENV=="dev"){
-    console.log(1);
-}
-
 
 
