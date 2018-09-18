@@ -1,0 +1,9 @@
+@function px2rem($val:0,$base:100){
+    @return $val/$base + rem;
+}
+@function px2percent($val:0,$base:640) {
+    @return $val/$base * 100%;
+}
+@function px2vh($val:0,$base:100){
+    @return $val/$base + vh;
+}
