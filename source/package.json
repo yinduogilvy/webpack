@@ -5,8 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "dev": "npm run watch ",
-    "build": "webpack --config build/webpack.prod.js",
-    "watch": "webpack-dev-server --config build/webpack.dev.js",
+    "build": "webpack --progress --inline --config build/webpack.prod.js",
+    "watch": "webpack-dev-server --progress --inline  --config build/webpack.dev.js",
     "webpack": "webpack --config build/webpack.dev.js"
   },
   "keywords": [],
@@ -35,6 +35,8 @@
     "css-loader": "^0.28.10",
     "cssnano": "^3.10.0",
     "cssnano-preset-advanced": "^4.0.0-rc.2",
+    "eslint": "^5.9.0",
+    "eslint-loader": "^2.1.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.10",
     "html-webpack-plugin": "^3.0.0",
